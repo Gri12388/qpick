@@ -19,7 +19,7 @@ body {
   height: 100%;
   padding-top: 15.07px;
   border-radius: 30px;
-
+  background-color: var(--color-white);
 }
 
 .image {
@@ -170,7 +170,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 1440px;
-  height: 1594px;
+  height: fit-content;
   margin: 0 auto;
   background-color: var(--color-gray);
 }
@@ -273,7 +273,9 @@ body {
 
 .headphones {
   width: 1110px;
-  height: 889px;
+  /* height: 889px; */
+  height: fit-content;
+  margin-bottom: 23px;
 
 }
 
