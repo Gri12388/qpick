@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/normalize.css">
+  <link rel="stylesheet" href="./assets/css/fonts.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="icon"  href="./assets/pics/ico/favicon.ico">
+  <title>QPICK</title>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <a href="./index.html" class="header__logo hover">QPICK</a>
+      <div class="header__icons">
+        <div class="header__icon">
+          <div class="header__heart">
+            <svg class="header__heart-svg svg">
+              <use xlink:href="./assets/pics/svg/pics.svg#heart">
+              </use>
+            </svg>
+          </div>
+          <div class="header__circle-heart" style="display:none">
+            2
+          </div>
+        </div>
+        <div class="header__icon">
+          <div class="header__cart">
+            <svg class="header__cart-svg svg">
+              <use xlink:href="./assets/pics/svg/pics.svg#cart">
+              </use>
+            </svg>
+          </div>
+          <div class="header__circle-cart">
+            1
+          </div>
+        </div>
+      </div>
+    </header>
+
+  <div class="cart">
+    <div class="cart__goods">
+      <h3 class="cart__basket">Корзина</h3>
+      <div class="cart__card">
+        <div class="cart__left">
+          <div class="cart__imagearea">
+            <img src="./assets/pics/png/1.png" alt="good" class="cart__image">
+          </div>
+          <div class="cart__counterarea">
+            <div class="cart__minus hover">
+              <div class="cart__minus-wrapper">
+                <svg class="cart__minus-svg svg">
+                  <use xlink:href="./assets/pics/svg/pics.svg#minus">
+                  </use>
+                </svg>
+              </div>
+            </div>
+            <p class="cart__count">1</p>
+            <div class="cart__plus hover">
+              <div class="cart__plus-wrapper">
+                <svg class="cart__plus-svg svg">
+                  <use xlink:href="./assets/pics/svg/pics.svg#plus">
+                  </use>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cart__right">
+          <div class="cart__deletearea">
+            <div class="cart__delete">
+              <svg class="cart__delete-svg">
+                <use xlink:href="./assets/pics/svg/pics.svg#delete">
+                </use>
+              </svg>
+            </div>
+          </div>
+          <div class="cart__descriptionarea">
+            <p class="class__description">Apple BYZ S852I</p>
+            <p class="class__cost">2 927 ₽</p>
+          </div>
+          <div class="cart__pricearea">
+            <p class="cart__price"> 2 927 ₽</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cart__result">
+      <div class="cart__total">
+        <div class="cart__bill">
+          <p class="cart__res">ИТОГО</p>
+          <p class="cart__sum">₽ 2 927</p>
+        </div>
+        <button class="cart__button hover">Перейти к оформлению</button>
+      </div>
+    </div>
+  </div>
+
+    <footer class="footer">
+      <div class="footer__container-left">
+        <div class="footer__subcontainer-logo">
+          <a href="./index.html" class="footer__logo hover">QPICK</a>
+        </div>
+        <div class="footer__subcontainer-pages">
+          <div class="footer__list-pages">
+            <a href="#" class="footer__line hover">Избранное</a>
+            <a href="#" class="footer__line hover">Корзина</a>
+            <a href="#" class="footer__line hover">Контакты</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__container-right">
+        <div class="footer__subcontainer-config">
+          <div class="footer__list-config">
+            <a href="#" class="footer__service hover">Условия сервиса</a>
+            <div class="footer__langbar">
+              <img src="./assets/pics/png/globe.png" alt="globe" class="footer__globe">
+              <p class="footer__lang hover footer__lang-chosen">Рус</p>
+              <p class="footer__lang hover">Eng</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer__subcontainer-nets">
+          <div class="footer__netsbar">
+            <div class="footer__net">
+              <svg class="footer__net-svg svg">
+                <use xlink:href="./assets/pics/svg/pics.svg#vk">
+                </use>
+              </svg>
+            </div>
+            <div class="footer__net">
+              <svg class="footer__net-svg svg">
+                <use xlink:href="./assets/pics/svg/pics.svg#telegramm">
+                </use>
+              </svg>
+            </div>
+            <div class="footer__net">
+              <svg class="footer__net-svg svg">
+                <use xlink:href="./assets/pics/svg/pics.svg#whatsapp">
+                </use>
+              </svg>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <script src="./assets/js/script.js"></script>
+</body>
+</html>

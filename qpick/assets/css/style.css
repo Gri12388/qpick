@@ -8,9 +8,28 @@ body {
   --color-black-1C: #1C1C27;
   --color-black-natural: #000000;
   --color-red: #DF6464;
+  --transition: .5s;
 }
 
 /*--------------------------- Common ---------------------------*/
+
+.svg, .hover {
+  transition: var(--transition);
+}
+
+.svg:hover {
+  fill: var(--color-orange);
+  cursor: pointer;
+}
+
+.cart__minus:hover .cart__minus-svg, .cart__plus:hover .cart__plus-svg {
+  fill: var(--color-black-natural);
+}
+
+.hover:hover {
+  color: var(--color-orange);
+  cursor: pointer;
+}
 
 .card {
   display: flex;
@@ -508,6 +527,22 @@ body {
   background-color: var(--color-orange);
 }
 
+.cart__minus-wrapper {
+  width: 18px;
+  height: 18px;
+}
+
+.cart__plus-wrapper {
+  width: 17px;
+  height: 14px;
+}
+
+.cart__minus-svg, .cart__plus-svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--color-white);
+}
+
 .cart__count {
   margin-top: 7px;
   font-family: Montserrat, sans-serif;
@@ -641,3 +676,5 @@ body {
   color: var(--color-white);
   background-color: var(--color-black);
 }
+
+
