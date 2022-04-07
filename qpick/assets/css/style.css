@@ -466,6 +466,16 @@ body {
   min-height: 691px;
 }
 
+.cart-empty {
+  justify-content: center;
+  align-items: center;
+  font-family: Montserrat, sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 50px;
+  color: var(--color-orange);
+}
+
 .cart__goods {
   width: 635px;
   height: fit-content;
@@ -505,8 +515,10 @@ body {
 
 .cart__image {
   width: 146.53px;
+  height: 136px;
   margin-top: 6px;
   margin-left: 18px;
+  object-fit: contain;
 }
 
 .cart__counterarea {

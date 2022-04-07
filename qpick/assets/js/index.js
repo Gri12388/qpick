@@ -54,16 +54,6 @@ function expose(where, what) {
   })
 }
 
-function showGoodsAmount() {
-  let basket = JSON.parse(sessionStorage.getItem('basket'));
-  if (basket.length === 0) cart.style='display:none';
-  else {
-    cart.style='display:flex';
-    cart.textContent = basket.reduce((sum, item)=>sum+item.count, 0);
-  } 
-  
-}
-
 function addGood(e) {
     if(e.target.className.split(' ')[0]==='buy') {
       let basket = JSON.parse(sessionStorage.getItem('basket'));
@@ -71,7 +61,7 @@ function addGood(e) {
       if (good = basket.find(elem=>{if (elem.id === e.currentTarget.dataset.goodId) return elem})) good.count++;
       else basket.push({id: e.currentTarget.dataset.goodId, count: 1}); 
       sessionStorage.setItem('basket', JSON.stringify(basket));
-      showGoodsAmount();
+      data.showGoodsAmount(cart);
     }
 }
 
@@ -81,7 +71,7 @@ function init() {
   
   if (!sessionStorage.getItem('basket')) sessionStorage.setItem('basket', JSON.stringify([]));
 
-  showGoodsAmount();
+  data.showGoodsAmount(cart);
 
   document.querySelectorAll('.card').forEach(item=>item.addEventListener('click', addGood));
 }

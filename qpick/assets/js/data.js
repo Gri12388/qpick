@@ -48,3 +48,12 @@ export const goods = [
     discount: null,
   }
 ];
+
+export function showGoodsAmount(where) {
+  let basket = JSON.parse(sessionStorage.getItem('basket'));
+  if (basket.length === 0) where.style='display:none';
+  else {
+    where.style='display:flex';
+    where.textContent = basket.reduce((sum, item)=>sum+item.count, 0);
+  } 
+}
