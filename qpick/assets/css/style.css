@@ -172,7 +172,7 @@ body {
   margin-right: -9px;
 }
 
-.content-discount .newprice {
+.card-discount .newprice {
   width: 100%;
   font-family: Montserrat, sans-serif;
   font-size: 19.17px;
@@ -464,7 +464,6 @@ body {
   justify-content: space-between;
   width: 1110px;
   min-height: 691px;
-
 }
 
 .cart__goods {
@@ -488,6 +487,7 @@ body {
   justify-content: space-between;
   width: 100%;
   height: 218px;
+  margin-bottom: 12px;
   border-radius: 30px;
   background-color: var(--color-white);
 }
