@@ -3,6 +3,19 @@ import * as data from './data.js'
 const display = document.querySelector('.cart');
 const cart = document.querySelector('.header__circle-cart');
 
+function countTotal() {
+  let basket = JSON.parse(sessionStorage.getItem('basket'));
+  if (basket.length === 0) return;
+
+  let total = display.querySelector('.cart__sum');
+  let sum = 0;
+  basket.forEach(item=>{
+    let price = data.goods.find(elem=>elem.id === +item.id).price
+    sum += price * item.count;
+  })
+  total.textContent = sum + ' ₽';
+}
+
 function expose() {
   let basket = JSON.parse(sessionStorage.getItem('basket'));
   if (basket.length === 0) return;
@@ -11,9 +24,7 @@ function expose() {
     let card = document.createElement('div');
     card.classList.add('cart__card');
     
-    let cardData = data.goods.find(elem=>{
-      if (elem.id === +item.id) return elem;
-    });
+    let cardData = data.goods.find(elem=>elem.id === +item.id);
 
     card.innerHTML = `<div class="cart__left">
     <div class="cart__imagearea">
@@ -61,6 +72,16 @@ function expose() {
   });
 }
 
+function makeOder() {
+  let basket = JSON.parse(sessionStorage.getItem('basket'));
+  basket.length = 0;
+  sessionStorage.setItem('basket', JSON.stringify(basket));
+  data.showGoodsAmount(cart);
+  display.classList.add('cart-empty');
+  display.textContent = 'Заказ оформлен';
+}
+
+
 (function init() {
   if (!sessionStorage.getItem('basket')) sessionStorage.setItem('basket', JSON.stringify([]));
   
@@ -71,22 +92,27 @@ function expose() {
   else {
     if (display.classList.contains('cart-empty')) display.classList.remove('cart-empty');
     display.innerHTML = `<div class="cart__goods">
-    <h3 class="cart__basket">Корзина</h3>
-    
-  </div>
-  <div class="cart__result">
-    <div class="cart__total">
-      <div class="cart__bill">
-        <p class="cart__res">ИТОГО</p>
-        <p class="cart__sum">₽ 2 927</p>
+        <h3 class="cart__basket">Корзина</h3>
+
       </div>
-      <button class="cart__button hover">Перейти к оформлению</button>
-    </div>
-  </div>`
+      <div class="cart__result">
+        <div class="cart__total">
+          <div class="cart__bill">
+            <p class="cart__res">ИТОГО</p>
+            <p class="cart__sum"></p>
+          </div>
+          <button class="cart__button hover">Перейти к оформлению</button>
+        </div>
+      </div>`;
+  
+    expose();
+
+    countTotal();
+
+    document.querySelector('.cart__button').addEventListener('click', makeOder);
   }
 
-  expose();
-
   data.showGoodsAmount(cart);
+  
 })();
 
