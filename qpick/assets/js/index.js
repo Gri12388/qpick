@@ -14,13 +14,11 @@ const expositionWireless = [
   {id:5},
 ];
 
-function main() {
-  const wireArea = document.getElementById('wireArea');
-  const wirelessArea = document.getElementById('wirelessArea');
-  expose(wireArea, expositionWire);
-  expose(wirelessArea, expositionWireless);
-  if (!sessionStorage.getItem('basket')) sessionStorage.setItem('basket', JSON.stringify([]));
-}
+const wireArea = document.getElementById('wireArea');
+const wirelessArea = document.getElementById('wirelessArea');
+const cart = document.querySelector('.header__circle-cart');
+
+
 
 function expose(where, what) {
   what.forEach(item=>{
@@ -56,4 +54,36 @@ function expose(where, what) {
   })
 }
 
-main();
+function showGoodsAmount() {
+  let basket = JSON.parse(sessionStorage.getItem('basket'));
+  if (basket.length === 0) cart.style='display:none';
+  else {
+    cart.style='display:flex';
+    cart.textContent = basket.reduce((sum, item)=>sum+item.count, 0);
+  } 
+  
+}
+
+function addGood(e) {
+    if(e.target.className.split(' ')[0]==='buy') {
+      let basket = JSON.parse(sessionStorage.getItem('basket'));
+      let good;
+      if (good = basket.find(elem=>{if (elem.id === e.currentTarget.dataset.goodId) return elem})) good.count++;
+      else basket.push({id: e.currentTarget.dataset.goodId, count: 1}); 
+      sessionStorage.setItem('basket', JSON.stringify(basket));
+      showGoodsAmount();
+    }
+}
+
+function init() {
+  expose(wireArea, expositionWire);
+  expose(wirelessArea, expositionWireless);
+  
+  if (!sessionStorage.getItem('basket')) sessionStorage.setItem('basket', JSON.stringify([]));
+
+  showGoodsAmount();
+
+  document.querySelectorAll('.card').forEach(item=>item.addEventListener('click', addGood));
+}
+
+init();
