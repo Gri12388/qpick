@@ -53,9 +53,9 @@ function expose() {
   </div>
   <div class="cart__right">
     <div class="cart__deletearea">
-      <div class="cart__delete">
-        <svg class="cart__delete-svg">
-          <use xlink:href="./assets/pics/svg/pics.svg#delete">
+      <div class="cart__delete" data-delete="delete">
+        <svg class="cart__delete-svg svg" data-delete="delete">
+          <use xlink:href="./assets/pics/svg/pics.svg#delete" data-delete="delete">
           </use>
         </svg>
       </div>
@@ -105,6 +105,17 @@ function decreaseAmount(e) {
   
 }
 
+function deleteCard(e) {
+  if (e.target.dataset.delete !== 'delete') return
+  let basket = JSON.parse(sessionStorage.getItem('basket'));
+  let id = e.currentTarget.dataset.goodId;
+  let pos = basket.findIndex(item=>item.id === id);
+  if (pos != -1) basket.splice(pos, 1);
+  sessionStorage.setItem('basket', JSON.stringify(basket));
+  
+  init();
+}
+
 function makeOder() {
   let basket = JSON.parse(sessionStorage.getItem('basket'));
   basket.length = 0;
@@ -114,9 +125,7 @@ function makeOder() {
   display.textContent = 'Заказ оформлен';
 }
 
-
-
-(function init() {
+function init() {
   if (!sessionStorage.getItem('basket')) sessionStorage.setItem('basket', JSON.stringify([]));
   
   if (JSON.parse(sessionStorage.getItem('basket')).length === 0) {
@@ -126,18 +135,18 @@ function makeOder() {
   else {
     if (display.classList.contains('cart-empty')) display.classList.remove('cart-empty');
     display.innerHTML = `<div class="cart__goods">
-        <h3 class="cart__basket">Корзина</h3>
-
+    <h3 class="cart__basket">Корзина</h3>
+    
+    </div>
+    <div class="cart__result">
+    <div class="cart__total">
+      <div class="cart__bill">
+        <p class="cart__res">ИТОГО</p>
+        <p class="cart__sum"></p>
       </div>
-      <div class="cart__result">
-        <div class="cart__total">
-          <div class="cart__bill">
-            <p class="cart__res">ИТОГО</p>
-            <p class="cart__sum"></p>
-          </div>
-          <button class="cart__button hover">Перейти к оформлению</button>
-        </div>
-      </div>`;
+      <button class="cart__button hover">Перейти к оформлению</button>
+    </div>
+    </div>`;
   
     expose();
 
@@ -148,9 +157,13 @@ function makeOder() {
     document.querySelectorAll('.cart__card').forEach(item=>item.addEventListener('click', increaseAmount)); 
     
     document.querySelectorAll('.cart__card').forEach(item=>item.addEventListener('click', decreaseAmount)); 
+    
+    document.querySelectorAll('.cart__card').forEach(item=>item.addEventListener('click', deleteCard)); 
   }
 
   data.showGoodsAmount(cart);
   
-})();
+};
+
+init();
 
