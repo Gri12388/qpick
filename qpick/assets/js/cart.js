@@ -23,6 +23,7 @@ function expose() {
   basket.forEach(item=>{
     let card = document.createElement('div');
     card.classList.add('cart__card');
+    card.dataset.goodId = item.id;
     
     let cardData = data.goods.find(elem=>elem.id === +item.id);
 
@@ -31,19 +32,19 @@ function expose() {
       <img src="./assets/pics/png/${cardData.id}.png" alt="good" class="cart__image">
     </div>
     <div class="cart__counterarea">
-      <div class="cart__minus hover">
-        <div class="cart__minus-wrapper">
-          <svg class="cart__minus-svg svg">
-            <use xlink:href="./assets/pics/svg/pics.svg#minus">
+      <div class="cart__minus hover" data-minus="minus">
+        <div class="cart__minus-wrapper" data-minus="minus">
+          <svg class="cart__minus-svg svg" data-minus="minus">
+            <use xlink:href="./assets/pics/svg/pics.svg#minus" data-minus="minus">
             </use>
           </svg>
         </div>
       </div>
       <p class="cart__count">${item.count}</p>
-      <div class="cart__plus hover">
-        <div class="cart__plus-wrapper">
-          <svg class="cart__plus-svg svg">
-            <use xlink:href="./assets/pics/svg/pics.svg#plus">
+      <div class="cart__plus hover" data-plus="plus">
+        <div class="cart__plus-wrapper" data-plus="plus">
+          <svg class="cart__plus-svg svg" data-plus="plus">
+            <use xlink:href="./assets/pics/svg/pics.svg#plus" data-plus="plus">
             </use>
           </svg>
         </div>
@@ -72,6 +73,38 @@ function expose() {
   });
 }
 
+function increaseAmount(e) {
+  if (e.target.dataset.plus !== 'plus') return
+  let basket = JSON.parse(sessionStorage.getItem('basket'));
+  let id = e.currentTarget.dataset.goodId;
+  let price = data.goods.find(item=>item.id === +id).price;
+  let total = display.querySelector('.cart__sum');
+  let count = e.currentTarget.querySelector('.cart__count');
+  basket.find(item=>item.id === id).count++;
+  sessionStorage.setItem('basket', JSON.stringify(basket));
+  data.showGoodsAmount(cart);
+  count.textContent = +count.textContent + 1;
+  total.textContent = parseFloat(total.textContent) + price + ' ₽';
+}
+
+function decreaseAmount(e) {
+  if (e.target.dataset.minus !== 'minus') return
+  let basket = JSON.parse(sessionStorage.getItem('basket'));
+  let id = e.currentTarget.dataset.goodId;
+  let price = data.goods.find(item=>item.id === +id).price;
+  let total = display.querySelector('.cart__sum');
+  let count = e.currentTarget.querySelector('.cart__count');
+  let elem = basket.find(item=>item.id === id);
+  if (elem.count > 1) elem.count--;
+  sessionStorage.setItem('basket', JSON.stringify(basket));
+  data.showGoodsAmount(cart);
+  if (+count.textContent > 1) {
+    count.textContent = +count.textContent - 1;
+    total.textContent = parseFloat(total.textContent) - price + ' ₽';
+  }
+  
+}
+
 function makeOder() {
   let basket = JSON.parse(sessionStorage.getItem('basket'));
   basket.length = 0;
@@ -80,6 +113,7 @@ function makeOder() {
   display.classList.add('cart-empty');
   display.textContent = 'Заказ оформлен';
 }
+
 
 
 (function init() {
@@ -110,6 +144,10 @@ function makeOder() {
     countTotal();
 
     document.querySelector('.cart__button').addEventListener('click', makeOder);
+
+    document.querySelectorAll('.cart__card').forEach(item=>item.addEventListener('click', increaseAmount)); 
+    
+    document.querySelectorAll('.cart__card').forEach(item=>item.addEventListener('click', decreaseAmount)); 
   }
 
   data.showGoodsAmount(cart);
