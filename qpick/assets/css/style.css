@@ -477,6 +477,7 @@ body {
 .cart-empty {
   justify-content: center;
   align-items: center;
+  text-align: center;
   font-family: Montserrat, sans-serif;
   font-size: 40px;
   font-weight: 800;
@@ -573,12 +574,14 @@ body {
 }
 
 .cart__right {
-  width: 450px;
+  width: 71%;
   height: 100%;
   padding-top: 18px;
 }
 
 .cart__deletearea {
+  display: flex;
+  justify-content: end;
   width: 100%;
   height: 29.5%;
 }
@@ -592,11 +595,14 @@ body {
 .cart__delete {
   width: 21px;
   height: 17px;
-  margin-left: 399px;
+  margin-right: 28px;
 
 }
 
 .cart__descriptionarea {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
   width: 100%;
   height: 52%;
 }
@@ -630,9 +636,11 @@ body {
 }
 
 .cart__price {
+  display: flex;
+  justify-content: end;
   width: 100%;
   height: 18px;
-  margin-left: 365px;
+  padding-right: 40px;
   font-family: Montserrat, sans-serif;
   font-size: 15px;
   font-weight: 600;
@@ -717,12 +725,42 @@ body {
   .headphones__grid {
     grid-template-columns: repeat(2, 350px);
   }
+
+  .cart {
+    width: 100%;
+  }
+}
+
+@media (max-width: 999px) {
+  .cart {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cart__total {
+    margin-bottom: 30px;
+  }
 }
 
 @media (max-width: 729px) {
   .headphones__grid {
     grid-template-columns: repeat(1, 350px);
   }
+}
+
+@media (max-width: 634px) {
+  .cart__goods {
+    width: 100%;
+  }
+  
+  .cart__card {
+    width: 100%;
+  }
+
+  .class__description {
+    height: fit-content;
+  }
+
 }
 
 @media (max-width: 619px) {
@@ -751,6 +789,10 @@ body {
 }
 
 @media (max-width: 349px) {
+  .footer__container-left {
+    margin-left: 20px;
+  }
+  
   .container {
     width: 100%;
   }
@@ -764,8 +806,8 @@ body {
     grid-template-columns: repeat(1, auto);
   }
 
-  .footer__container-left {
-    margin-left: 20px;
+  .cart__result {
+    width: 100%;
   }
 
 }
