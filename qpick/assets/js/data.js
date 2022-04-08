@@ -50,7 +50,19 @@ export const goods = [
     discount: null,
   }
 ]; // Database of goods / База данных товаров
-
+export const translation = [
+  ['Наушники', 'Headphones'],                       //0
+  ['Беспроводные наушники', 'Wireless headphones'], //1
+  ['Купить', 'Buy'],                                //2
+  ['Избранное', 'Favorites'],                       //3
+  ['Корзина', 'Basket'],                            //4
+  ['Контакты', 'Contacts'],                         //5
+  ['Условия сервиса', 'Service conditions'],        //6
+  ['ИТОГО', 'IN TOTAL'],                            //7
+  ['Перейти к оформлению', 'Make order'],           //8
+  ['Корзина пуста', 'Basket is empty'],             //9
+  ['Заказ оформлен', 'Order has been made']         //10
+]
 
 
 //---------------------------- Functions ----------------------------
@@ -68,4 +80,33 @@ export function showGoodsAmount(where) {
     where.style='display:flex';
     where.textContent = basket.reduce((sum, item)=>sum+item.count, 0);
   } 
+}
+
+
+
+//--------------------------------------------------------------------
+// The function switches language at footer and translates page's text
+// Функция переключает язык в footer и переводит текст страницы
+export function switchLanguage(e) {
+  if (e.currentTarget.id === 'rus') localStorage.setItem('lang12388', '0');
+  else if (e.currentTarget.id === 'eng') localStorage.setItem('lang12388', '1');
+  translateText();
+}
+
+
+
+//--------------------------------------------------------------------
+// The function translates text of pages to appropriate language
+// Функция переводит текст сраниц на соответствующий язык
+export function translateText() {
+  document.querySelectorAll('[data-translate]').forEach(item=> {
+    item.textContent = translation[+item.dataset.translate][+localStorage.getItem('lang12388')];
+  });
+  document.querySelectorAll('.footer__lang').forEach(item=>{
+    if (item.classList.contains('footer__lang-chosen')) item.classList.remove('footer__lang-chosen');
+  })
+  switch (localStorage.getItem('lang12388')) {
+    case '0': document.getElementById('rus').classList.add('footer__lang-chosen'); break;
+    case '1': document.getElementById('eng').classList.add('footer__lang-chosen'); break;
+  }
 }

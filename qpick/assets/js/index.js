@@ -58,7 +58,7 @@ function expose(where, what) {
           <img src="./assets/pics/png/star.png" alt="star" class="star">
           <p class="number">${cardData.rate}</p>
         </div>
-        <p class="buy hover">Купить</p>
+        <p class="buy hover" data-translate="2">Купить</p>
       </div>
     </div>`;
     
@@ -101,9 +101,15 @@ function init() {
   
   if (!sessionStorage.getItem('basket')) sessionStorage.setItem('basket', JSON.stringify([]));
 
+  if (!localStorage.getItem('lang12388')) localStorage.setItem('lang12388', '1');
+
   data.showGoodsAmount(cart);
 
+  data.translateText(document.getElementsByTagName('body'));
+
   document.querySelectorAll('.card').forEach(item=>item.addEventListener('click', addGood));
+
+  document.querySelectorAll('.footer__lang').forEach(item=>item.addEventListener('click', data.switchLanguage));
 }
 
 

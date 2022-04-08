@@ -186,7 +186,9 @@ function makeOder() {
   data.showGoodsAmount(cart);
   
   display.classList.add('cart-empty');
-  display.textContent = 'Заказ оформлен';
+  display.dataset.translate = '10';
+  display.textContent = data.translation[+display.dataset.translate][+localStorage.getItem('lang12388')];
+
 }
 
 
@@ -202,22 +204,25 @@ function makeOder() {
 function init() {
   if (!sessionStorage.getItem('basket')) sessionStorage.setItem('basket', JSON.stringify([]));
   
+  if (!localStorage.getItem('lang12388')) localStorage.setItem('lang12388', '1');
+
   if (JSON.parse(sessionStorage.getItem('basket')).length === 0) {
     display.classList.add('cart-empty');
-    display.textContent = 'Корзина пуста';
+    display.dataset.translate = '9'
+    display.textContent = data.translation[+display.dataset.translate][+localStorage.getItem('lang12388')];
   }
   else {
     if (display.classList.contains('cart-empty')) display.classList.remove('cart-empty');
     display.innerHTML = `<div class="cart__goods">
-    <h3 class="cart__basket">Корзина</h3>
+    <h3 class="cart__basket" data-translate="4">Корзина</h3>
     </div>
     <div class="cart__result">
     <div class="cart__total">
       <div class="cart__bill">
-        <p class="cart__res">ИТОГО</p>
+        <p class="cart__res" data-translate="7">ИТОГО</p>
         <p class="cart__sum"></p>
       </div>
-      <button class="cart__button hover">Перейти к оформлению</button>
+      <button class="cart__button hover" data-translate="8">Перейти к оформлению</button>
     </div>
     </div>`;
   
@@ -235,6 +240,10 @@ function init() {
   }
 
   data.showGoodsAmount(cart);
+
+  data.translateText(document.getElementsByTagName('body'));
+
+  document.querySelectorAll('.footer__lang').forEach(item=>item.addEventListener('click', data.switchLanguage));
   
 };
 
