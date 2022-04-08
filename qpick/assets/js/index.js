@@ -1,36 +1,48 @@
+//---------------------------- Modules ----------------------------
+
 import * as data from './data.js'
 
+
+
+//---------------------------- Variables ----------------------------
+
+
 const expositionWire = [
-  {id:0, mode:'oldPrice'},
-  {id:1},
-  {id:2},
-  {id:0, mode:'discount'},
-  {id:1},
-  {id:2},
-];
+  {id:'0', mode:'oldPrice'},
+  {id:'1'},
+  {id:'2'},
+  {id:'0', mode:'discount'},
+  {id:'1'},
+  {id:'2'},
+]; // Array of wired headphones / Массив проводных наушников 
 const expositionWireless = [
-  {id:3},
-  {id:4},
-  {id:5},
-];
+  {id:'3'},
+  {id:'4'},
+  {id:'5'},
+]; // Array of wireless headphones / Массив безпроводных наушников 
 
-const wireArea = document.getElementById('wireArea');
-const wirelessArea = document.getElementById('wirelessArea');
-const cart = document.querySelector('.header__circle-cart');
+const cart = document.querySelector('.header__circle-cart'); // Pic of a cart in top-right corner / Пиктограмма тележки в верхнем правом углу
+const wireArea = document.getElementById('wireArea'); // Area of wired headphones / Зона проводных наушников
+const wirelessArea = document.getElementById('wirelessArea'); // Area of wireless headphones / Зона безпроводных наушников
 
 
 
+//---------------------------- Functions ----------------------------
+
+//--------------------------------------------------------------------
+// The function forms and exposes cards of goods on the page 
+// Функция формирует и размещает карточки товаров на странице
 function expose(where, what) {
   what.forEach(item=>{
-    let cardData = data.goods.find(elem=>{
-      if (elem.id === item.id) return elem;
-      else return null;
-    });
-    if (cardData === null) return;
+    let cardData = data.goods.find(elem=>elem.id === item.id);
+    
+    if (cardData === undefined) return;
+    
     let card = document.createElement('div');
     card.classList.add('card');
     if (item.mode==='discount') card.classList.add('card-discount');
     card.dataset.goodId = item.id;
+
     card.innerHTML = `<img src="./assets/pics/png/${cardData.id}.png" alt="headphone" class="image">
     <div class="content">
       <div class="upline">
@@ -54,17 +66,35 @@ function expose(where, what) {
   })
 }
 
+
+
+//--------------------------------------------------------------------
+// The function adds a good to the basket
+// Функция добавляет товар в корзину
 function addGood(e) {
     if(e.target.className.split(' ')[0]==='buy') {
       let basket = JSON.parse(sessionStorage.getItem('basket'));
       let good;
-      if (good = basket.find(elem=>{if (elem.id === e.currentTarget.dataset.goodId) return elem})) good.count++;
+
+      if (good = basket.find(elem=>elem.id === e.currentTarget.dataset.goodId)) good.count++;
       else basket.push({id: e.currentTarget.dataset.goodId, count: 1}); 
+      
       sessionStorage.setItem('basket', JSON.stringify(basket));
+      
       data.showGoodsAmount(cart);
     }
 }
 
+
+
+//--------------------------------------------------------------------
+// The function prepares the page for upcoming operations with it's
+// elements: it forms missing parts of HTML code depending on 
+// emerging circumstances; it links event listeners. 
+
+// Функция подготавливает страницу для дальнейших операций с ее
+// элементами: формирует недостающие участик HTML кода в зависимости
+// складывающихся обстоятельств; подключает обработчики событий. 
 function init() {
   expose(wireArea, expositionWire);
   expose(wirelessArea, expositionWireless);
@@ -75,5 +105,9 @@ function init() {
 
   document.querySelectorAll('.card').forEach(item=>item.addEventListener('click', addGood));
 }
+
+
+
+//---------------------------- Execute ----------------------------
 
 init();
