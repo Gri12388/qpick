@@ -196,15 +196,17 @@ function makeOder() {
 //--------------------------------------------------------------------
 // The function prepares the page for upcoming operations with it's
 // elements: it forms missing parts of HTML code depending on 
-// emerging circumstances; it links event listeners. 
+// emerging circumstances; it links event listeners; it translates
+// text to required language. 
 
 // Функция подготавливает страницу для дальнейших операций с ее
 // элементами: формирует недостающие участик HTML кода в зависимости
-// складывающихся обстоятельств; подключает обработчики событий. 
+// складывающихся обстоятельств; подключает обработчики событий, 
+// переводит текст на нужный язык. 
 function init() {
   if (!sessionStorage.getItem('basket')) sessionStorage.setItem('basket', JSON.stringify([]));
   
-  if (!localStorage.getItem('lang12388')) localStorage.setItem('lang12388', '1');
+  if (!localStorage.getItem('lang12388')) localStorage.setItem('lang12388', '0');
 
   if (JSON.parse(sessionStorage.getItem('basket')).length === 0) {
     display.classList.add('cart-empty');

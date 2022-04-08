@@ -58,11 +58,11 @@ export const translation = [
   ['Корзина', 'Basket'],                            //4
   ['Контакты', 'Contacts'],                         //5
   ['Условия сервиса', 'Service conditions'],        //6
-  ['ИТОГО', 'IN TOTAL'],                            //7
+  ['ИТОГО', 'TOTAL'],                               //7
   ['Перейти к оформлению', 'Make order'],           //8
   ['Корзина пуста', 'Basket is empty'],             //9
   ['Заказ оформлен', 'Order has been made']         //10
-]
+]; // Dictionary / Словарь
 
 
 //---------------------------- Functions ----------------------------
